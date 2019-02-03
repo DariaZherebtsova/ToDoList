@@ -1,0 +1,8 @@
+<ul class="todolist">
+  <li *ngFor="let item of itemList"
+      (click)="onSelect(item)"
+      [class.checked]="item.done">{{item.text}}
+    <span class="close">x</span>
+  </li>
+</ul>
+<button class='plus' (click)="onPlus()">+</button>

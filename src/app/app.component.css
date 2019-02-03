@@ -1,0 +1,21 @@
+.scene { 
+  width: inherit;
+  height: 100vh;
+  background-color: rgb(224, 233, 230);
+  text-align: center;
+}
+
+.main {
+  display: inline-block;
+  /* width: auto; */
+  /* position: relative; */
+  /* margin-left: auto;
+  margin-right: auto; */
+  background-color: aliceblue;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+}
+
+footer {
+  position: relative;
+  top: 100px;
+}
