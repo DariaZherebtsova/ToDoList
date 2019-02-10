@@ -2,10 +2,12 @@
 <div class="list-lists">
   <h3 class="title">My ToDo Lists</h3>
   <div *ngFor="let list of lists" class="module">
-    <div>
+    <div class="one-list">
       <h4 class="name" (click)="onSelect(list)">{{list.name}}</h4>
+      <span class="close" (click)="delete(list)">x</span>
       <div *ngIf="list.isNew">
-        <input class="newName" #newName (keyup.enter)="setNewName(newName.value, list)"> 
+        <input class="newName" #newName (keyup.enter)="setNewName(newName.value, list)"
+          [appSetFocus]="list.isNew"> 
       </div>
     </div>
     <div *ngIf="list.isOpen">
@@ -13,7 +15,6 @@
     </div>
   </div>
   <input class='add-new' #addNewList (keyup.enter)="onEnter(addNewList.value)"
-        [@openClose]="addInput ? 'open' : 'closed'"
         [(ngModel)]="cleanValue"
         [appSetFocus]="addInput">
   <!-- <div *ngIf="addNew">
@@ -23,4 +24,5 @@
 </div>
 <!-- routerLink="/itemlist/{{list.id}}" -->
 <!-- [@openClose]="list.isOpen ? 'open' : 'closed'" -->
-<!-- [appSetFocus]="addInput" -->
+<!-- [appSetFocus]="addInput" --> 
+<!-- [@openClose]="addInput ? 'open' : 'closed'" -->

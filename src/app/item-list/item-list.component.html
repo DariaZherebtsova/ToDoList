@@ -1,8 +1,16 @@
 <ul class="todolist">
-  <li *ngFor="let item of itemList"
+  <li *ngFor="let item of itemListMemos"
       (click)="onSelect(item)"
       [class.checked]="item.done">{{item.text}}
-    <span class="close">x</span>
+    <span class="close" (click)="delete(item)">x</span>
   </li>
 </ul>
-<button class='plus' (click)="onPlus()">+</button>
+<div *ngIf="fAddItem">
+  <input class="newMemo" #newMemo (keyup.enter)="setNewMemo(newMemo.value)"
+    [appSetFocus]="fAddItem"> 
+</div>
+<div *ngIf="fPlus">
+  <button class='plus' (click)="addItem()">+</button>
+</div>
+
+<!-- <button class='plus' (click)="onPlus()">+</button> -->

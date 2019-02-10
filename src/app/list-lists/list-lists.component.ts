@@ -67,14 +67,21 @@ export class ListListsComponent implements OnInit {
   onPlus() {
     // this.addInput = true;
     // this.addNewList.nativeElement.focus();
-    this.newList = {
-      id: this.lists.length + 1,
+    console.log('***onPlus', this.lists.length);
+    const newList = {
+      id: null,
       name: 'new list',
       memos: [],
       done: false,
       isOpen: true,
       isNew: true };
-    this.lists.push(this.newList);
+    // this.lists.push(this.newList);
+    this.dataService.addList(newList as List)
+    .subscribe(list => {
+      console.log('******', list);
+      this.lists.push(list);
+      console.log('***onPlus end', this.lists.length);
+    });
     // this.addNew = true;
   }
 
@@ -101,9 +108,14 @@ export class ListListsComponent implements OnInit {
     list.isNew = false;
   }
 
+  delete(list: List): void {
+    this.lists = this.lists.filter(l => l !== list);
+    this.dataService.deleteList(list).subscribe();
+  }
+
   goBack(): void {
     this.location.back();
   }
 
 }
- 
+

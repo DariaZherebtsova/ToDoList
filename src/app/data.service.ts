@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 // import { LISTLISTS } from './mock-lists';
 import { List } from './list';
+import { Memo } from './memo';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, filter, tap } from 'rxjs/operators';
@@ -75,5 +76,33 @@ export class DataService {
       catchError(this.handleError<any>('updateData'))
     );
   }
+
+  /** POST: add a new hero to the server */
+  addList (data: List): Observable<List> {
+    console.log('data servise addList');
+    return this.http.post<List>(this.listsUrl, data, httpOptions).pipe(
+      tap((newList: List) => this.log(`added list w/ id=${newList.id}`)),
+      catchError(this.handleError<List>('addList'))
+    );
+  }
+
+  updateList (list: List): Observable<any> {
+    return this.http.put(this.listsUrl, list, httpOptions).pipe(
+      tap(_ => this.log(`updated list id=${list.id}`)),
+      catchError(this.handleError<any>('updateList'))
+    );
+  }
+
+  /** DELETE: delete the hero from the server */
+  deleteList (hero: List | number): Observable<List> {
+    const id = typeof hero === 'number' ? hero : hero.id;
+    const url = `${this.listsUrl}/${id}`;
+
+    return this.http.delete<List>(url, httpOptions).pipe(
+      tap(_ => this.log(`deleted list id=${id}`)),
+      catchError(this.handleError<List>('deleteList'))
+    );
+  }
+
 }
 

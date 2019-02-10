@@ -14,9 +14,10 @@ export class ItemListComponent implements OnInit {
 
   lists: List[];
   currList: List;
-  itemList: Memo[];
+  itemListMemos: Memo[];
   newItem: Memo;
   fAddItem: Boolean = false;
+  fPlus: Boolean = true;
   addValue: String = '';
 
   @Input() id = 1;
@@ -34,7 +35,7 @@ export class ItemListComponent implements OnInit {
     this.dataService.getList(id)
     .subscribe(list => {
       this.currList = list;
-      this.itemList = this.currList.memos;
+      this.itemListMemos = this.currList.memos;
     });
   }
 
@@ -43,15 +44,31 @@ export class ItemListComponent implements OnInit {
   }
 
   addItem(): void {
-    this.newItem = { done: false, text: '' };
-    this.itemList.push(this.newItem);
     this.fAddItem = true;
+    this.fPlus = false;
   }
 
-  onEnter(value: string) {
-    this.newItem = { done: false, text: value };
-    this.itemList.push(this.newItem);
-    this.addValue = ' ';
+  setNewMemo(newMemo: String): void {
+    this.fAddItem = false;
+    this.fPlus = true;
+    const newItem: Memo = { done: false, text: newMemo };
+    this.itemListMemos.push(newItem);
+    this.currList.memos = this.itemListMemos;
+    this.dataService.updateList(this.currList)
+     .subscribe(() => { console.log('***success updateList', this.currList.memos); });
   }
+
+  delete (item: Memo): void {
+    this.itemListMemos = this.itemListMemos.filter(memo => memo !== item);
+    this.currList.memos = this.itemListMemos;
+    this.dataService.updateList(this.currList)
+     .subscribe(() => { console.log('***success updateList', this.currList.memos); });
+  }
+
+  // onEnter(value: string) {
+  //   this.newItem = { done: false, text: value };
+  //   this.itemList.push(this.newItem);
+  //   this.addValue = ' ';
+  // }
 
 }
