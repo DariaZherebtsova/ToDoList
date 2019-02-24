@@ -20,7 +20,7 @@ export class ItemListComponent implements OnInit {
   fPlus: Boolean = true;
   addValue: String = '';
 
-  @Input() id = 1;
+  @Input() id = +this.route.snapshot.paramMap.get('id');
 
   constructor(
     private route: ActivatedRoute,

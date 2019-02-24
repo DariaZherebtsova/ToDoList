@@ -104,5 +104,20 @@ export class DataService {
     );
   }
 
+  /* GET heroes whose name contains search term */
+  searchLists(term: string): Observable<List[]> {
+    console.log('***searchLists', term);
+    if (!term.trim()) {
+      console.log('***term empty');
+      // if not search term, return empty hero array.
+      return of([]);
+      // return this.http.get<List[]>(this.listsUrl);
+    }
+    return this.http.get<List[]>(`${this.listsUrl}/?name=${term}`).pipe(
+      tap(_ => this.log(`found lists matching "${term}"`)),
+      catchError(this.handleError<List[]>('searchLists', []))
+    );
+  }
+
 }
 

@@ -1,0 +1,10 @@
+#search-box {
+  height: 38px;
+}
+
+.header {
+  font-size: 22px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #474e47;
+  margin-block-end: 5px;
+}
