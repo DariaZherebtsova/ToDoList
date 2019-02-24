@@ -13,6 +13,7 @@ import { ListListsComponent } from './list-lists/list-lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SetFocusDirective } from './set-focus.directive';
+import { ListSearchComponent } from './list-search/list-search.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SetFocusDirective } from './set-focus.directive';
     ItemListComponent,
     ListListsComponent,
     MessagesComponent,
-    SetFocusDirective
+    SetFocusDirective,
+    ListSearchComponent
   ],
   imports: [
     BrowserModule,
